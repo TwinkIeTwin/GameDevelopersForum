@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div class="container wrap">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-success">
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <div class="btn-group pull-right">
+
+                    </div>
+                </div>
+
+                @*<div class="panel-body">
+                        <ul id="messagesList" class="chat">
+                        </ul>
+                    </div>*@
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <input type="text" id="messageInput" class="form-control input-sm" placeholder="@Localizer["type_message"]" />
+                            </div>
+                            <div class="col-sm-1" style="visibility:hidden">
+                                @if (User.Identity.Name != "" && User.Identity.Name != null)
+                                {
+                                    <input value="@User.Identity.Name" type="text" id="userInput" class="form-control input-sm" />
+                                }
+                                else
+                                {
+                                    <input value="Anonymous" type="text" id="userInput" class="form-control input-sm" />
+
+                                }
+                            </div>
+                        </div>
+                        <span class="input-group-btn">
+                            <input type="button" value="@Localizer["send"]" id="sendButton" class="btn btn-danger btn-sm">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

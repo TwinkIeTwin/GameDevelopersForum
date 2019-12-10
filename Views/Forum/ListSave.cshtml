@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div style="width:50%; background-color:#222222; margin: auto auto auto auto; padding: 5px">
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="Forum" asp-action="Create">@Localizer["create_topic"] </a>
+        }
+        foreach (var Topic in Model)
+        {
+            <a asp-controller="Forum" asp-action="Show" asp-route-id="@Topic.Id">
+                <h2 style="font-size: 25px" class="sign__word">@Topic.Name </h2>
+            </a>
+            <p style="color: #CCCB7C; font-size: 15px">     @Topic.Description </p>
+            <p style="color: #CC5C5E; font-size: 10px">     @Topic.CreationDate </p>
+            <hr />
+        }
+    }
+</div>

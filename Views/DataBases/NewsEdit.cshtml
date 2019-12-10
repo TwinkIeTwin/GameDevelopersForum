@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model GameDevelopersForum.ViewModels.NewsEditModel
+<form asp-action="NewsEdit" asp-controller="DataBases" asp-anti-forgery="true" class="text-center;" style="margin: auto auto auto auto; max-width: 30%; transform: translateY(55px)">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <div>
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="Name" placeholder="@Localizer["name"]: @ViewBag.CurrentNews.Name" />
+            <span asp-validation-for="Name" />
+        </div>
+        <br />
+        <div>
+            <textarea style="width:100%" class="img-rounded" asp-for="Description" placeholder="@Localizer["description"]: @ViewBag.CurrentNews.Description"></textarea><br />
+            <span asp-validation-for="Description" />
+        </div>
+        <div>
+            <textarea style="width:100%" class="img-rounded" asp-for="Info" placeholder="@Localizer["info"]: @ViewBag.CurrentNews.Info"></textarea><br />
+            <span asp-validation-for="Info" />
+        </div>
+        <div>
+            <input type="submit" value="@Localizer["save_changes"]" class="btn btn-lg btn-primary btn-block img-rounded" />
+        </div>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model GameDevelopersForum.ViewModels.EditModel
+@*<form asp-controller="Account" asp-action="AddProfileImage" method="post" enctype="multipart/form-data" class="text-center;" style="margin: auto auto auto auto; max-width: 30%; transform: translateY(55px)">
+        <input type="file" name="uploadedFile" />
+        <input type="submit" value="Загрузить" />
+    </form>*@
+
+@inject IViewLocalizer Localizer
+
+<form asp-action="Edit" asp-controller="Account" asp-anti-forgery="true" class="text-center;" style="margin: auto auto auto auto; max-width: 30%; transform: translateY(55px)">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <div>
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="Email" placeholder="@Localizer["change_email"]: (@ViewBag.user.Email)" />
+            <span asp-validation-for="Email" />
+        </div>
+        <br />
+        <div>
+            <textarea style="width:100%" class="img-rounded" asp-for="About" placeholder="@Localizer["change_description"]: (@ViewBag.user.About)"></textarea><br />
+            <span asp-validation-for="About" />
+        </div>
+        <br />
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="LastPassword" placeholder="@Localizer["current_password"] (@Localizer["necessary"])" />
+            <span asp-validation-for="LastPassword" />
+        </div>
+        <br />
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="NewPassword" placeholder="@Localizer["new_password"] (@Localizer["unnecessary"])" />
+            <span asp-validation-for="NewPassword" />
+        </div>
+        <br />
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="ConfirmPassword" placeholder="@Localizer["confirm_new_password"]" />
+            <span asp-validation-for="ConfirmPassword" />
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="@Localizer["save_changes"]" class="btn btn-lg btn-primary btn-block img-rounded" />
+        </div>
+        <div>
+
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,65 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@model List<Topic>
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@if (User.Identity.IsAuthenticated)
+{
+    <div id="content">
+    <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="Forum" asp-action="Create">@Localizer["create_topic"] </a>
+
+</div>
+}
+
+@if (Model != null && Model.Count != 0)
+{
+    <div class="posts" id="postsArea">
+        @{await Html.RenderPartialAsync("ListGet", Model);}
+    </div>
+}
+else
+{
+    <p>sorry, no one topic exist </p>
+}
+
+@*/TopicList
+    TopicList
+    TopicList/
+    /TopicList/
+    /Forum/TopicList/
+    Forum/TopicList/
+    Forum/TopicList*@
+
+
+<script>
+    $(function () {
+        var pageNumber = 0;
+        var _inCallback = false;
+        function getTopics() {
+            if (pageNumber > -1 && !_inCallback) {
+                _inCallback = true;
+                pageNumber++;
+                $.ajax({
+                    type: 'GET',
+                    url: '/Forum/TopicList',
+                    data: { pageNumber },
+                    success: function (data) {
+                        if (data != '') {
+                            $(".posts").append(data);
+                        }
+                        else {
+                            pageNumber = -1;
+                        }
+                        _inCallback = false;
+                    }
+                });
+            }
+        }
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
+
+                getTopics();
+            }
+        });
+    })
+</script>
+

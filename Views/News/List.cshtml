@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+    <div>
+        <div id="content">
+            @{
+                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                {
+                    <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="News" asp-action="Create">@Localizer["add_news"]</a>
+                }
+                foreach (var news in Model)
+                {
+                    <div class="text-center">
+                        <div class="sign__word">
+                            <h2>@news.Name </h2>
+                        </div>
+                        <img id="image_news" src="@String.Concat("/images/News/" + news.PreviewImageName)" alt="IMAGE NOT FOUND">
+
+                        <p style="color:#CCCB7C; margin-top:6px"> @news.Description</p>
+                        <div style="padding:3px">
+                            <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="News" asp-action="Show" asp-route-id="@news.Id">@Localizer["more_details"]</a>
+                        </div>
+                    </div>
+                    <hr />
+                }
+            }
+        </div>
+    </div>

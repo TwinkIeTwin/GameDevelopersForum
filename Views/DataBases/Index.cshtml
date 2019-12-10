@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div style="width:50%; margin: auto auto auto auto;">
+    <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="DataBases" asp-action="News">
+        @Localizer["news"]
+    </a>
+    <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="DataBases" asp-action="Topics">
+        @Localizer["forum"]
+    </a>
+    @if (User.IsInRole("admin"))
+    {
+<a class="btn btn-lg btn-primary btn-block img-rounded" type="submit" asp-controller="DataBases" asp-action="Users">
+    @Localizer["users"]
+</a>
+    }
+</div>

@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div style="background-color:#222222; width:50%; margin: auto auto auto auto; padding: 5px;">
+    <h1 style="color:white; font-size: 30px" class="text-center sign__word"> @Model.Name </h1>
+    @*<img id="image_news" src="@String.Concat("/images/News/" + Model.PreviewImageName)" alt="IMAGE NOT FOUND">*@
+    <h3 style="color:#CCCB7C; font-size: 20px"> @Model.Description</h3>
+    <h5 style="color:#85DAFC; font-size: 15px">@Model.Info </h5>
+
+    <h6 style="color:#7BE891; font-size: 10px">@Localizer["publishing_date"]: @Model.PublishingDate </h6>
+    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+    {
+        <a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="DataBases" asp-action="NewsEdit" asp-route-id="@Model.Id">@Localizer["redact"]</a>
+    }
+</div>

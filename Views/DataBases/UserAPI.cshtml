@@ -1,0 +1,173 @@
+﻿
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<div style="background-color:brown">
+
+    <h2>Список пользователей</h2>
+    <form name="userForm">
+        <input type="hidden" name="Id" value="0" />
+        <div class="form-group">
+            <label for="Login">Логин:</label>
+            <input class="form-control" name="Login" />
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input class="form-control" name="Email" />
+        </div>
+        <div class="form-group">
+            <label for="Password">Пароль:</label>
+            <input class="form-control" name="Password" />
+        </div>
+        <div class="form-group">
+            <label for="About">О себе:</label>
+            <input class="form-control" name="About" />
+        </div>
+
+        <div class="panel-body">
+            <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
+            <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+        </div>
+    </form>
+    <table class="table table-condensed table-striped table-bordered">
+        <thead><tr><th>Id</th><th>Логин</th><th>О себе</th><th>Пароль</th> <th>Email</th><th></th></tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script>
+    // Получение всех пользователей
+    function GetUsers() {
+        $.ajax({
+            url: '/api/users/',
+            type: 'GET',
+            contentType: "application/json",
+            success: function (users) {
+                var rows = "";
+                $.each(users, function (index, user) {
+                    // добавляем полученные элементы в таблицу
+                    rows += row(user);
+                })
+                $("table tbody").append(rows);
+            }
+        });
+    }
+    // Получение одного пользователя
+    function GetUser(Id) {
+        $.ajax({
+            url: '/api/users/' + Id,
+            type: 'GET',
+            contentType: "application/json",
+            success: function (user) {
+                var form = document.forms["userForm"];
+                form.elements["Id"].value = user.Id;
+                form.elements["Login"].value = user.Login;
+                form.elements["About"].value = user.About;
+                form.elements["Password"].value = user.Password;
+                form.elements["Email"].value = user.Email;
+            }
+        });
+    }
+    // Добавление пользователя
+    function CreateUser(userLogin, userAbout, userPassword, userEmail) {
+        $.ajax({
+            url: "api/users",
+            contentType: "application/json",
+            method: "POST",
+            data: JSON.stringify({
+                Login: userLogin,
+                About: userAbout,
+                Password: userPassword,
+                Email: userEmail
+            }),
+            success: function (user) {
+                reset();
+                $("table tbody").append(row(user));
+            }
+        })
+    }
+    // Изменение пользователя
+    function EditUser(userId, userLogin, userAbout, userPassword, userEmail) {
+        $.ajax({
+            url: "api/users",
+            contentType: "application/json",
+            method: "PUT",
+            data: JSON.stringify({
+                Id: userId,
+                Login: userLogin,
+                About: userAbout,
+                Password: userPassword,
+                Email: userEmail
+            }),
+            success: function (user) {
+                reset();
+                $("tr[data-rowid='" + user.Id + "']").replaceWith(row(user));
+            }
+        })
+    }
+
+    // сброс формы
+    function reset() {
+        var form = document.forms["userForm"];
+        form.reset();
+        form.elements["Id"].value = 0;
+    }
+
+    // Удаление пользователя
+    function DeleteUser(Id) {
+        $.ajax({
+            url: "api/users/" + Id,
+            contentType: "application/json",
+            method: "DELETE",
+            success: function (user) {
+                $("tr[data-rowid='" + user.Id + "']").remove();
+            }
+        })
+    }
+    // создание строки для таблицы
+    var row = function (user) {
+        return "<tr data-rowid='" + user.Id + "'><td>" + user.Id + "</td>" +
+            "<td>" + user.Login + "</td> <td>" +
+            user.About + "</td> <td>" +
+            user.Password + "</td> <td>" + user.Email + "</td>" +
+        "<td><a class='editLink' data-Id='" + user.Id + "'>Изменить</a> | " +
+            "<a class='removeLink' data-Id='" + user.Id + "'>Удалить</a></td></tr>";
+    }
+    // сброс значений формы
+    $("#reset").click(function (e) {
+
+        e.preventDefault();
+        reset();
+    })
+
+    // отправка формы
+    $("form").submit(function (e) {
+        e.preventDefault();
+        var Id = this.elements["Id"].value;
+        var Login = this.elements["Login"].value;
+        var About = this.elements["About"].value;
+        var Password = this.elements["Password"].value;
+        var Email = this.elements["Email"].value;
+        if (Id == 0)
+            CreateUser(Login, About, Password, Email);
+        else
+            EditUser(Id, Login, About, Password, Email);
+    });
+
+    // нажимаем на ссылку Изменить
+    $("body").on("click", ".editLink", function () {
+        var Id = $(this).data("Id");
+        GetUser(Id);
+    })
+    // нажимаем на ссылку Удалить
+    $("body").on("click", ".removeLink", function () {
+        var Id = $(this).data("Id");
+        DeleteUser(Id);
+    })
+
+    // загрузка пользователей
+    GetUsers();
+
+</script>
+

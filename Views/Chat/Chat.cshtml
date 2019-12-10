@@ -1,0 +1,8 @@
+﻿@model List<Message>
+<div style="width: 50%; margin: auto auto auto auto">
+    @*@await Html.PartialAsync("chatReceive", Model);*@
+    @{await Html.RenderPartialAsync("chatReceive", Model);}
+    <div>
+        @await Html.PartialAsync("chatSend")
+    </div>
+</div>

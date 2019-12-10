@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<div style="width: 50%; background-color: #222222; margin: auto auto auto auto; color:#CCCB7C; padding:6px;" class="text-center;">
+    <h1 style="font-size: 20px; color:white" class="sign__word text-center">@Model.Login </h1>
+
+    @if (Model.imageName != null)
+    {
+        <div class="text-center" style="margin: auto auto auto auto">
+            <img src="@String.Concat("/images/Users/", Model.imageName)" style="max-width:35%;  padding: 20px;" />
+        </div>
+    }
+    else
+    {
+        <div class="text-center" style="margin: auto auto auto auto">
+            <img src="~/images/Users/null_image.jpg" style="max-width:35%; padding: 20px;" />
+        </div>
+    }
+    <p>@Model.About </p>
+    <hr />
+    <p>@Localizer["registration_date"]: @Model.RegistrationDate.Date </p>
+    <p>email: @Model.Email </p>
+
+    @if (Model.Login == User.Identity.Name)
+    {
+<a class="btn btn-lg btn-primary btn-block img-rounded" asp-controller="Account" asp-action="Edit">@Localizer["edit"]</a>
+    }
+
+
+</div>

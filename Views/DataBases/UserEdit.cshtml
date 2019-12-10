@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model GameDevelopersForum.ViewModels.UserEditModel
+<form asp-action="UserEdit" asp-controller="DataBases" asp-anti-forgery="true" class="text-center;" style="margin: auto auto auto auto; max-width: 30%; transform: translateY(55px)">
+    <div class="validation" asp-validation-summary="ModelOnly" />
+    <div>
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="Login" placeholder="@Localizer["login"]: @ViewBag.CurrentUser.Login" />
+            <span asp-validation-for="Login" />
+        </div>
+        <br />
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="Email" placeholder="e-mail: @ViewBag.CurrentUser.Email" />
+            <span asp-validation-for="Email" />
+        </div>
+        <br />
+        <div>
+            <textarea style="width:100%" class="img-rounded" asp-for="About" placeholder="@Localizer["about"]: @ViewBag.CurrentUser.About"></textarea><br />
+            <span asp-validation-for="About" />
+        </div>
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="Password" placeholder="@Localizer["password"]: @ViewBag.CurrentUser.Password" />
+            <span asp-validation-for="Password" />
+        </div>
+        <div>
+            <input style="width:100%" class="img-rounded" asp-for="RoleId" placeholder="RoleId: @ViewBag.CurrentUser.RoleId" />
+            <span asp-validation-for="RoleId" />
+        </div>
+        <div>
+            <input type="submit" value="@Localizer["save_changes"]" class="btn btn-lg btn-primary btn-block img-rounded" />
+        </div>
+    </div>
+</form>

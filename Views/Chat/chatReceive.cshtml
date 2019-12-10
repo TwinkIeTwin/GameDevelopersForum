@@ -1,0 +1,25 @@
+﻿<div class="container wrap">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-success">
+                <div class="panel-heading" id="accordion">
+
+                    <div class="panel-body" style="background-color:white">
+                        <ul id="messagesList" class="chat">
+                            @{
+                                int i = 0;
+                                foreach (var message in Model)
+                                {
+                                    string sender = ViewBag.Users[i++];
+                                    <li>@sender: @message.Text<p style="color:green">at: @message.Time </p></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

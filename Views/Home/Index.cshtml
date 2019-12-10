@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Anton'>
+
+<link rel="stylesheet" href="~/css/style.css">
+<div id="ui" style="padding-left: 675px; padding-top:50px">
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+    <div class="text">OVERGAME</div>
+</div>
+
+<br />
+
+<div style="width:50%; height:700px; margin:auto auto auto auto; background-color:#292929">
+    <hr />
+    <div class="text-center">
+        <h1 style="color: #CCCB7C; font-size:20px;">@Localizer["hello"]</h1>
+        <h2 style="color: #CCCB7C; font-size:20px;">@Localizer["you_not"] <a style="color:#85DAFC" asp-controller="Account" asp-action="Login">@Localizer["authorized"]</a>, @Localizer["firstEnter"]</h2>
+    </div>
+    <img style="width:300px;" align="left" src="/images/site/space-man.png" />
+    <p style="color: #85DAFC; font-size:15px;">@Localizer["for_you_1"]</p>
+    <p style="color: #84D9FB; font-size:15px;">@Localizer["for_you_2"]</p>
+    <p style="color: #83D8FA; font-size:15px;">@Localizer["for_you_3"]</p>
+    <p style="color: #82D7F9; font-size:15px;">@Localizer["for_you_4"]</p>
+    <p style="color: #81D6F8; font-size:15px;">@Localizer["for_you_5"]</p>
+    <p style="color: #84D9FB; font-size:15px;">@Localizer["interested"] <a style="color:#CCCB7C" asp-controller="Account" asp-action="Register">@Localizer["register"]</a> @Localizer["join"]</p>
+</div>
